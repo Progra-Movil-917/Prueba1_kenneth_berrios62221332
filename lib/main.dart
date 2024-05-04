@@ -1,20 +1,63 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
+class ColorWidget extends StatefulWidget{
+  @override
+  _ColorWidget createState() => _ColorWidget();
+
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class _ColorWidget extends State<ColorWidget>{
+  Color _colorActual = Colors.yellow;
+  Color _cambioColor = Colors.blue;
+
+  void cambiarColor(){
+    setState((){
+
+      if(_colorActual == Colors.yellow){
+        _colorActual = _cambioColor;
+      }
+      else{
+        _colorActual = Colors.yellow;
+      }
+
+    });
+     
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+
+  Widget build(BuildContext context){
+    return GestureDetector(
+      onTap: (){
+        cambiarColor();
+      },
+      child: Container(
+        width: 100,
+        height: 100,
+        color: _colorActual,
+        child: Center(
+          child: Text(
+            'Toca para cambiar color',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );
   }
 }
+
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text('Widget Cambio Color'),
+        ),
+        body: Center(child: ColorWidget(),
+      ),
+    ),
+  ));
+}
+
